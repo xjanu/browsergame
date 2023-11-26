@@ -1,5 +1,7 @@
 import { IGameObject } from "./game_object"
-import { InputEvents } from "./input"
+import { InputState } from "./input"
+
+const PLAYER_SPEED = 500;
 
 export class Player implements IGameObject
 {
@@ -11,19 +13,11 @@ export class Player implements IGameObject
     this.y = y
   }
 
-  public update( dt: number, input: InputEvents ) {
-    if (input.right) {
-      this.x += 100 * dt
-    }
-    if (input.left) {
-      this.x -= 100 * dt
-    }
-    if (input.down) {
-      this.y += 100 * dt
-    }
-    if (input.up) {
-      this.y -= 100 * dt
-    }
+  public update( dt: number, input: InputState ) {
+    this.x += input.right * PLAYER_SPEED * dt
+    this.x -= input.left  * PLAYER_SPEED * dt
+    this.y += input.down  * PLAYER_SPEED * dt
+    this.y -= input.up    * PLAYER_SPEED * dt
   }
 
   public draw( ctx: CanvasRenderingContext2D ) {

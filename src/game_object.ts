@@ -1,7 +1,7 @@
-import { InputEvents } from "./input"
+import { InputState } from "./input"
 
 export interface IGameObject {
-  update( dt: number, input: InputEvents ): void
+  update( dt: number, input: InputState ): void
   draw( ctx: CanvasRenderingContext2D ): void
 }
 

@@ -1,4 +1,4 @@
-import { InputEvents } from "./input"
+import { Input } from "./input"
 import { IGameObject } from "./game_object"
 import { FPSCounter } from "./text_interface"
 import { Player } from "./player"
@@ -8,7 +8,7 @@ class Game
   private canvas: HTMLCanvasElement
   private ctx: CanvasRenderingContext2D
   private game_objects: IGameObject[] = [ new FPSCounter( 50, 50 ), new Player( 100, 100 ) ]
-  private input: InputEvents = new InputEvents()
+  private input: Input = new Input()
 
   constructor()
   {
@@ -42,7 +42,7 @@ class Game
   }
 
   private update( dt: number ) {
-    this.game_objects.forEach( (obj) => obj.update( dt, this.input ) )
+    this.game_objects.forEach( (obj) => obj.update( dt, this.input.get_state() ) )
   }
 
   private draw()
