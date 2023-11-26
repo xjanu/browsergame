@@ -1,13 +1,5 @@
 {
-    "include": ["src/**/*"],
-    "main": "src/app.ts",
-    "compilerOptions": {
-      "module": "commonjs",
-      "esModuleInterop": true,
-      "target": "es6",
-      "moduleResolution": "node",
-      "sourceMap": true,
-      "outDir": "www/dist"
-    },
-    "lib": ["es2015"]
+  "compilerOptions": {
+      "sourceMap": true
+  }
 }
