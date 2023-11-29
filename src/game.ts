@@ -2,6 +2,7 @@ import { Input } from "./input"
 import { IGameObject } from "./game_object"
 import { FPSCounter } from "./text_interface"
 import { Player } from "./player"
+import { COLOR } from "./constants"
 
 class Game
 {
@@ -47,7 +48,7 @@ class Game
 
   private draw()
   {
-    this.ctx.fillStyle = "black"
+    this.ctx.fillStyle = COLOR.bg
     this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height)
 
     this.game_objects.forEach( (obj) => obj.draw( this.ctx ) )

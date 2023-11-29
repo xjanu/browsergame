@@ -1,7 +1,6 @@
 import { IGameObject } from "./game_object"
 import { InputState } from "./input"
-
-const PLAYER_SPEED = 500;
+import { PLAYER_SPEED, COLOR } from "./constants";
 
 export class Player implements IGameObject
 {
@@ -21,7 +20,7 @@ export class Player implements IGameObject
   }
 
   public draw( ctx: CanvasRenderingContext2D ) {
-    ctx.fillStyle = "blue"
+    ctx.fillStyle = COLOR.player
     ctx.fillRect(this.x, this.y, 50, 50)
   }
 }

@@ -1,9 +1,10 @@
 import { TextObject } from "./game_object"
+import { COLOR, FONT } from "./constants"
 
 export class FPSCounter extends TextObject
 {
   constructor( x: number, y: number,
-               color: string = "white", font: string = "16pt sans-serif" ) {
+               color: string = COLOR.text, font: string = FONT ) {
     super( x, y, "", color, font )
   }
 

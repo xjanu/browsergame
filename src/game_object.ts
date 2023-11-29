@@ -1,4 +1,5 @@
 import { InputState } from "./input"
+import { COLOR, FONT, STROKE_WIDTH } from "./constants"
 
 export interface IGameObject {
   update( dt: number, input: InputState ): void
@@ -13,7 +14,7 @@ export abstract class TextObject implements IGameObject {
   protected font: string
 
   constructor( x: number, y: number, text: string,
-               color: string = "white", font: string = "16pt sans-serif" ) {
+               color: string = COLOR.text, font: string = FONT ) {
     this.x = x
     this.y = y
     this.text = text
