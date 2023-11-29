@@ -1,26 +1,17 @@
-import { IGameObject } from "./game_object"
+import { OutlineObject } from "./game_object"
 import { InputState } from "./input"
-import { PLAYER_SPEED, COLOR } from "./constants";
+import { PLAYER_SPEED, COLOR, PLAYER_SHAPE } from "./constants";
 
-export class Player implements IGameObject
+export class Player extends OutlineObject
 {
-  private x: number
-  private y: number
-
   constructor( x: number, y: number ) {
-    this.x = x
-    this.y = y
+    super( x, y, PLAYER_SHAPE, COLOR.player )
   }
 
   public update( dt: number, input: InputState ) {
-    this.x += input.right * PLAYER_SPEED * dt
-    this.x -= input.left  * PLAYER_SPEED * dt
-    this.y += input.down  * PLAYER_SPEED * dt
-    this.y -= input.up    * PLAYER_SPEED * dt
-  }
-
-  public draw( ctx: CanvasRenderingContext2D ) {
-    ctx.fillStyle = COLOR.player
-    ctx.fillRect(this.x, this.y, 50, 50)
+    this.pos.x += input.right * PLAYER_SPEED * dt
+    this.pos.x -= input.left  * PLAYER_SPEED * dt
+    this.pos.y += input.down  * PLAYER_SPEED * dt
+    this.pos.y -= input.up    * PLAYER_SPEED * dt
   }
 }

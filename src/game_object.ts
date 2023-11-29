@@ -30,3 +30,35 @@ export abstract class TextObject implements IGameObject {
     ctx.fillText(this.text, this.x, this.y)
   }
 }
+
+type Point = {
+  x: number
+  y: number
+}
+
+export abstract class OutlineObject implements IGameObject
+{
+  protected pos:   Point
+  protected shape: Point[]
+  protected color: string
+
+  constructor( x: number, y: number, shape: Point[], color: string ) {
+    this.pos = { x, y }
+    this.shape = shape
+    this.color = color
+  }
+
+  public abstract update( dt: number, input: InputState ): void
+
+  public draw( ctx: CanvasRenderingContext2D ) {
+    ctx.beginPath()
+    ctx.moveTo(this.pos.x + this.shape[0].x, this.pos.y + this.shape[0].y)
+    for (let i = 1; i < this.shape.length; i++) {
+      ctx.lineTo(this.pos.x + this.shape[i].x, this.pos.y + this.shape[i].y)
+    }
+    ctx.closePath()
+    ctx.lineWidth = STROKE_WIDTH;
+    ctx.strokeStyle = this.color
+    ctx.stroke()
+  }
+}
