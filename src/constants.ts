@@ -10,4 +10,9 @@ export const enum COLOR {
 }
 
 export const STROKE_WIDTH = 2;
-export const PLAYER_SHAPE = [ { x: 0, y: 0 }, { x: 50, y: 0 }, { x: 25, y: 50 } ];
+export const PLAYER_SHAPE = [
+  [   0, -30 ],
+  [ -20,  20 ],
+  [   0,  10 ],
+  [  20,  20 ]
+]

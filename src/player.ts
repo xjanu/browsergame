@@ -1,11 +1,16 @@
 import { OutlineObject } from "./game_object"
 import { InputState } from "./input"
 import { PLAYER_SPEED, COLOR, PLAYER_SHAPE } from "./constants";
+import { Point } from "./point"
 
 export class Player extends OutlineObject
 {
   constructor( x: number, y: number ) {
-    super( x, y, PLAYER_SHAPE, COLOR.player )
+    super(
+      x, y,
+      PLAYER_SHAPE.map(
+        ( tuple ) => { return new Point( tuple[0], tuple[1] ) } ),
+      COLOR.player )
   }
 
   public update( dt: number, input: InputState ) {

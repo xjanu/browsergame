@@ -1,5 +1,6 @@
 import { InputState } from "./input"
 import { COLOR, FONT, STROKE_WIDTH } from "./constants"
+import { Point } from "./point"
 
 export interface IGameObject {
   update( dt: number, input: InputState ): void
@@ -31,11 +32,6 @@ export abstract class TextObject implements IGameObject {
   }
 }
 
-type Point = {
-  x: number
-  y: number
-}
-
 export abstract class OutlineObject implements IGameObject
 {
   protected pos:   Point
@@ -43,7 +39,7 @@ export abstract class OutlineObject implements IGameObject
   protected color: string
 
   constructor( x: number, y: number, shape: Point[], color: string ) {
-    this.pos = { x, y }
+    this.pos = new Point( x, y )
     this.shape = shape
     this.color = color
   }
