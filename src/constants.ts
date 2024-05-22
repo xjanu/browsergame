@@ -1,11 +1,11 @@
-
 export const FONT = "16pt sans-serif";
 export const PLAYER_SPEED = 500;
+export const PLAYER_ANGULAR_SPEED = 5;
 
 export const enum COLOR {
   bg = "black",
   text = "white",
-  player = "blue",
+  player = "green",
   asteroid = "white"
 }
 

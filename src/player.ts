@@ -1,6 +1,6 @@
 import { OutlineObject } from "./game_object"
 import { InputState } from "./input"
-import { PLAYER_SPEED, COLOR, PLAYER_SHAPE } from "./constants";
+import { PLAYER_SPEED, PLAYER_ANGULAR_SPEED, COLOR, PLAYER_SHAPE } from "./constants";
 import { Point } from "./point"
 
 export class Player extends OutlineObject
@@ -14,9 +14,13 @@ export class Player extends OutlineObject
   }
 
   public update( dt: number, input: InputState ) {
-    this.pos.x += input.right * PLAYER_SPEED * dt
-    this.pos.x -= input.left  * PLAYER_SPEED * dt
-    this.pos.y += input.down  * PLAYER_SPEED * dt
-    this.pos.y -= input.up    * PLAYER_SPEED * dt
+    this.angle += input.right * dt * PLAYER_ANGULAR_SPEED
+    this.angle -= input.left  * dt * PLAYER_ANGULAR_SPEED
+
+    let x = 0
+    x += input.down  * PLAYER_SPEED * dt
+    x -= input.up    * PLAYER_SPEED * dt
+
+    this.pos = this.pos.add( new Point( 0, x ).rotate( this.angle ) )
   }
 }
