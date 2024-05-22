@@ -8,16 +8,16 @@ class Game
 {
   private canvas: HTMLCanvasElement
   private ctx: CanvasRenderingContext2D
-  private game_objects: IGameObject[] = [
-    new FPSCounter( 50, 50 ),
-    new Player( document.body.clientWidth / 2, document.body.clientHeight / 2 )
-  ]
+  private game_objects: IGameObject[] = [ new FPSCounter( 50, 50 ) ]
   private input: Input = new Input()
 
   constructor()
   {
     this.canvas = document.getElementById("app") as HTMLCanvasElement
     this.ctx = this.canvas.getContext("2d")
+    this.game_objects.push(
+      new Player( document.body.clientWidth / 2, document.body.clientHeight / 2,
+                  this.game_objects ) )
     this.init()
   }
 
