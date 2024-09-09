@@ -39,9 +39,9 @@ export abstract class OutlineObject implements IGameObject
   protected shape: Point[]
   protected color: string
 
-  constructor( x: number, y: number, shape: Point[], color: string ) {
-    this.pos = new Point( x, y )
-    this.angle = 0;
+  constructor( pos: Point, shape: Point[], color: string ) {
+    this.pos = pos
+    this.angle = 0
     this.shape = shape
     this.color = color
   }

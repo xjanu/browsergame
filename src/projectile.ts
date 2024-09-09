@@ -3,8 +3,10 @@ import { Point } from "./point";
 
 export class Projectile extends OutlineObject
 {
-  constructor( x: number, y: number, angle: number, color: string ) {
-    super( x, y, [ new Point( 0, 0 ), new Point( 0, -10 ) ], color )
+  constructor( pos: Point, angle: number, color: string ) {
+    super( pos,
+           [ new Point( 0, 0 ), new Point( 0, -10 ) ],
+           color )
     this.angle = angle
   }
 

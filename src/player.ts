@@ -7,10 +7,11 @@ import { Projectile } from "./projectile";
 export class Player extends OutlineObject
 {
   private game_objects: IGameObject[]
+  last_shot = 0;
 
   constructor( x: number, y: number, game_objects: IGameObject[] ) {
     super(
-      x, y,
+      new Point( x, y ),
       PLAYER_SHAPE.map(
         ( tuple ) => { return new Point( tuple[0], tuple[1] ) } ),
       COLOR.player )
@@ -27,9 +28,13 @@ export class Player extends OutlineObject
 
     this.pos = this.pos.add( new Point( 0, x ).rotate( this.angle ) )
 
-    if ( input.space ) {
+    const now = performance.now()
+    if ( input.space && ( now - this.last_shot > 100 ) ) {
+      this.last_shot = now
       this.game_objects.push(
-        new Projectile( this.pos.x, this.pos.y, this.angle, this.color ) )
+        new Projectile(
+          this.pos.add( new Point( 0, -40 ).rotate( this.angle ) ),
+          this.angle, this.color ) )
     }
   }
 }
