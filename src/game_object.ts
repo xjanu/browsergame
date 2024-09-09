@@ -46,21 +46,26 @@ export abstract class OutlineObject implements IGameObject
     this.color = color
   }
 
+  private get_shape_abs_coords(): Point[]
+  {
+    return this.shape.map( ( p: Point ): Point => {
+      return this.pos.add(p.rotate( this.angle ))
+    })
+  }
+
   public abstract update( dt: number, input: InputState ): void
 
   private draw_path( ctx: CanvasRenderingContext2D, path: Point[] ) {
     ctx.beginPath()
-    ctx.moveTo(this.pos.x + path[0].x, this.pos.y + path[0].y)
-    for (let i = 1; i < path.length; i++) {
-      ctx.lineTo(this.pos.x + path[i].x, this.pos.y + path[i].y)
+    ctx.moveTo( path[0].x, path[0].y )
+    for ( let i = 1; i < path.length; i++ ) {
+      ctx.lineTo( path[i].x,  path[i].y )
     }
     ctx.closePath()
   }
 
   public draw( ctx: CanvasRenderingContext2D ) {
-    this.draw_path( ctx, this.shape.map( ( p: Point ): Point => {
-      return p.rotate( this.angle )
-    }))
+    this.draw_path( ctx, this.get_shape_abs_coords() )
     ctx.lineWidth = STROKE_WIDTH;
     ctx.strokeStyle = this.color
     ctx.stroke()
