@@ -4,11 +4,11 @@ import { FPSCounter } from "./text_interface"
 import { Player } from "./player"
 import { COLOR } from "./constants"
 
-class Game
+export class Game
 {
   private canvas: HTMLCanvasElement
   private ctx: CanvasRenderingContext2D
-  private game_objects: IGameObject[] = [ new FPSCounter( 50, 50 ) ]
+  public  game_objects: IGameObject[] = [ new FPSCounter( 50, 50 ) ]
   private input: Input = new Input()
 
   constructor()
@@ -16,8 +16,9 @@ class Game
     this.canvas = document.getElementById("app") as HTMLCanvasElement
     this.ctx = this.canvas.getContext("2d")
     this.game_objects.push(
-      new Player( document.body.clientWidth / 2, document.body.clientHeight / 2,
-                  this.game_objects ) )
+      new Player( document.body.clientWidth / 2,
+                  document.body.clientHeight / 2,
+                  this ) )
     this.init()
   }
 
@@ -39,10 +40,15 @@ class Game
     const t = performance.now()
     const dt = (t - prev_t) / 1000
 
+    this.destroy()
     this.update( dt )
     this.draw()
 
     requestAnimationFrame(() => this.loop( t ))
+  }
+
+  private destroy(){
+    this.game_objects = this.game_objects.filter( (obj) => !obj.destroy() )
   }
 
   private update( dt: number ) {

@@ -3,6 +3,7 @@ import { COLOR, FONT, STROKE_WIDTH } from "./constants"
 import { Point } from "./point"
 
 export interface IGameObject {
+  destroy(): boolean
   update( dt: number, input: InputState ): void
   draw( ctx: CanvasRenderingContext2D ): void
 }
@@ -22,6 +23,8 @@ export abstract class TextObject implements IGameObject {
     this.color = color
     this.font = font
   }
+
+  public abstract destroy(): boolean
 
   public abstract update( dt: number ): void
 
@@ -50,6 +53,15 @@ export abstract class OutlineObject implements IGameObject
   {
     return this.shape.map( ( p: Point ): Point => {
       return this.pos.add(p.rotate( this.angle ))
+    })
+  }
+
+  public destroy() {
+    return this.get_shape_abs_coords().every( (obj) => {
+      return obj.x < 0
+          || obj.y < 0
+          || obj.x > document.body.clientWidth
+          || obj.y > document.body.clientHeight
     })
   }
 
